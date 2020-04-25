@@ -1,0 +1,2 @@
+# Sortify
+Sortify is a Python application developed by <a href='https://eliasbenb.github.io'>Elias Benbourenane.</a> It uses the Spotify API to read your playlist information, allowing you to sort your Spotify playlists to your heart's desires
