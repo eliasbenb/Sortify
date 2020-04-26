@@ -22,7 +22,7 @@ def get_tracks(spotipy_obj, username, playlist_ids):
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 SCOPE = 'playlist-modify-private,playlist-modify-public,user-top-read'
-REDIRECT_URI = "http://127.0.0.1:5000/callback"
+REDIRECT_URI = "https://eliasbenb-sortify.herokuapp.com/callback"
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
 
@@ -45,7 +45,7 @@ def callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"http://127.0.0.1:5000/callback",
+        "redirect_uri":"https://eliasbenb-sortify.herokuapp.com/callback",
         "client_id":SPOTIFY_CLIENT_ID,
         "client_secret":SPOTIFY_CLIENT_SECRET
         })
