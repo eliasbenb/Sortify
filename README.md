@@ -1,6 +1,5 @@
 <a href="#"><h3 align="center"><img src="https://i.ibb.co/V9xTH3D/Sortify-Header.png" width="600px"></h3></a>
 <p align="center">
-  <a href="https://github.com/eliasbenb/Sortify/releases"><img src="https://img.shields.io/github/downloads/eliasbenb/Sortify/total?color=%231DB954&style=for-the-badge"></a>
   <a href="https://github.com/eliasbenb/Sortify/releases/latest"><img src="https://img.shields.io/github/v/release/eliasbenb/Sortify?color=%231DB954&style=for-the-badge"></a>
 </p>
 <p align="center">
