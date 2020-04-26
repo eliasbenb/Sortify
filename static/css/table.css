@@ -14,16 +14,24 @@ th, td {
 }
 
 .column1 {
-  width: 10%;
+  width: 7%;
   padding-left: 40px;
 }
 
 .column2 {
-  width: 60%;
+  width: 43%;
 }
 
 .column3 {
-  width: 35%;
+  width: 25%;
+}
+
+.column4 {
+  width: 12.5%;
+}
+
+.column5 {
+  width: 12.5%;
 }
 
 .table100-head th {

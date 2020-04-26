@@ -67,9 +67,13 @@ def login_success_page():
 
 @app.route('/playlists')
 def playlists_page():
-    global playlists_soup
-    playlists_soup = sp.current_user_playlists()
-    return render_template('playlists.html', playlists_soup = playlists_soup)
+    try:
+        print(sp)
+        global playlists_soup
+        playlists_soup = sp.current_user_playlists()
+        return render_template('playlists.html', playlists_soup = playlists_soup)
+    except:
+        return redirect("login")
 
 @app.route('/playlists/<int:index>')
 def playlist_page(index):
@@ -82,6 +86,8 @@ def playlist_page(index):
     results = sp.playlist(playlist['id'],
         fields="tracks,next")
     tracks = results['tracks']
+    for track in tracks['items']:
+        print(track['added_at'])
     return render_template('playlist.html', playlist = playlist, playlist_name = playlist_name, playlist_id = playlist_id, playlists_soup = playlists_soup, tracks = tracks, index = index)
 
 @app.route('/playlists/<int:index>/added_at')
@@ -116,7 +122,7 @@ def sort_by_alphabetical_za(index):
                     key=lambda k: k['track']["name"], reverse=True)
     track_ids = []
     for sorted_track in sorted_tracks:
-        track_ids.append(sorted_track['track']['id'])
+        track_ids.append(sorted_track['track']['id'])   
     sp.user_playlist_replace_tracks(username, playlist_id, track_ids)
     return render_template('sorted.html', playlist_name = playlist_name, index = index)
 
@@ -128,7 +134,7 @@ def sort_by_release_date_chronological(index):
                     key=lambda k: k['track']['album']['release_date'], reverse=True)
     track_ids = []
     for sorted_track in sorted_tracks:
-        track_ids.append(sorted_track['track']['id'])
+        track_ids.append(sorted_track['track']['id'])    
     sp.user_playlist_replace_tracks(username, playlist_id, track_ids)
     return render_template('sorted.html', playlist_name = playlist_name, index = index)
 
@@ -140,7 +146,7 @@ def sort_by_release_date_non_chronological(index):
                     key=lambda k: k['track']['album']['release_date'], reverse=False)
     track_ids = []
     for sorted_track in sorted_tracks:
-        track_ids.append(sorted_track['track']['id'])
+        track_ids.append(sorted_track['track']['id'])    
     sp.user_playlist_replace_tracks(username, playlist_id, track_ids)
     return render_template('sorted.html', playlist_name = playlist_name, index = index)
 
