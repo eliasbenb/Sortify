@@ -1,3 +1,4 @@
+
 <a href="#"><h3 align="center"><img src="https://i.ibb.co/V9xTH3D/Sortify-Header.png" width="600px"></h3></a>
 <p align="center">
   <a href="https://github.com/eliasbenb/Sortify/releases/latest"><img src="https://img.shields.io/github/v/release/eliasbenb/Sortify?color=%231DB954&style=for-the-badge"></a>
@@ -18,6 +19,7 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 	- Release Date (Non Chronological)
 	- Added Date
 - View playlist tracks in a table
+- Heroku deploy ready
 
 ## To do list:
 - Add support to sort playlists of more than 100 tracks
@@ -25,9 +27,29 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 - Add option to sort playlist into new playlist
 
 # Installation
-- To install Sortify either clone the repositry using `git clone https://github.com/eliasbenb/Sortify` or download the latest release from [here](https://github.com/eliasbenb/Sortify/releases)
-- Then install the requirements using `pip install -r requirements.txt`
-- Then run the Flask app using `flask run -p 37145` or you can run `app.py`
+### Prerequisites:
+- A server, could be your own computer or [Heroku](https://heroku.com); this repository is Heroku ready
+- [Python](https://www.python.org/downloads/) 3.8 or above
+- A [Spotify](https://developer.spotify.com/dashboard/applications) app
+
+### Part 1 (Spotify API):
+- First you need to setup a Spotify API app. To do this go to the [Spotify Developer's Dashboard](https://developer.spotify.com/)
+- Create an app
+- Name the app anything and describe it as anything. But set it as a *Website*
+- On the app's page click *Edit Settings* and under *Redirect URIs* add this: `http://127.0.0.1:5000/callback`
+- If your app is not locally hosted than make the Redirect URI something like this `https://yourwebsite.com/callback`
+- Finally exit back onto the main app's page and copy down the *Client ID* and *Client Secret*, you will need these in the next step
+
+### Part 2 (The App):
+- Now it's time to make the app. First clone this repository in a command line using `git clone https://github.com/eliasbenb/Sortify.git`
+- CD into the directory with `cd Sortify`
+- Open `app.py` with a text editor and change the following variables:
+	- `app.secret_key` to any string e.g. "string123"
+	- `SPOTIFY_CLIENT_ID` to the *Client ID* you got from [Step 1](#Part-1-Spotify-API)
+	- `SPOTIFY_CLIENT_SECRET` to the *Client Secret* you got from [Step 1](#Part-1-Spotify-API)
+	- `REDIRECT_URI` to whatever you set your *Redirect URI* to in [Step 1](#Part-1-Spotify-API)
+- If you are setting this up for a public website like I am I would recommend using Environment Variables to set the above variables
+- Now your app is ready to be used, to start the app just enter this in a command line `flask run`
 
 # Usage:
 ### Home Page:
