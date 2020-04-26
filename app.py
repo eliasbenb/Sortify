@@ -22,7 +22,7 @@ def get_tracks(spotipy_obj, username, playlist_ids):
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 SCOPE = 'playlist-modify-private,playlist-modify-public,user-top-read'
-REDIRECT_URI = "https://eliasbenb-sortify.herokuapp.com/callback"
+SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI')
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
 
@@ -32,7 +32,7 @@ def home_page():
 
 @app.route("/login")
 def login_page():
-    auth_url = f'{API_BASE}/authorize?client_id={SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
+    auth_url = f'{API_BASE}/authorize?client_id={SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri={SPOTIFY_REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
     print(auth_url)
     return redirect(auth_url)
 
@@ -45,7 +45,7 @@ def callback():
     res = requests.post(auth_token_url, data={
         "grant_type":"authorization_code",
         "code":code,
-        "redirect_uri":"https://eliasbenb-sortify.herokuapp.com/callback",
+        "redirect_uri":SPOTIFY_REDIRECT_URI,
         "client_id":SPOTIFY_CLIENT_ID,
         "client_secret":SPOTIFY_CLIENT_SECRET
         })
