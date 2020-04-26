@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block arrow_button %}
+<a href="#playlists" class="mouse-icon">
+    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+</a>
+{% endblock %}
+
+{% block body %}
+<div class="container" align="center" style="position:relative;">
+    <h1 style='margin-top: 8.5em;'>Playlists</h1>
+    <form action="#playlists" method="POST" style="margin-top: 3em;">
+        <a href="#playlists">
+            <div id="cssbutt" style="background: rgb(29, 185, 84); border-radius: 1000px; padding: 20px 45px; color: rgb(255, 255, 255); display: inline-block; font: bold 24px / 1 &quot;Open Sans&quot;, sans-serif; text-align: center;">View Playlists</div>
+        </a>
+    </form>
+</div>
+<section class="section" id="playlists">
+    <div class="container" style="margin-top: 29em;white-space:nowrap;">
+        {% for playlist in playlists_soup['items'] %}
+        <a href="/playlists/{{ loop.index }}"><img src="{{ playlist['images'][0]['url'] }}" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em; width: 20em; height: 20em;" ></a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
