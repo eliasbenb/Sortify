@@ -4,7 +4,7 @@
   <a href="https://github.com/eliasbenb/Sortify/releases/latest"><img src="https://img.shields.io/github/v/release/eliasbenb/Sortify?color=%231DB954&style=for-the-badge"></a>
 </p>
 <p align="center">
-  <a href="https://eliasbenb.github.io"><img src="https://i.ibb.co/6mG3jFz/Produced-by-eliasbenb.png" width="180"></a>
+  <a href="https://eliasbenb.github.io"><img src="https://i.ibb.co/2nYyCxj/Green.png" width="180"></a>
 </p>
 
 # What is this repo?
