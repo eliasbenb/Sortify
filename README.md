@@ -7,7 +7,7 @@
 </p>
 
 # What is this repo?
-Sortify is a Python app built with the Flask framework. It uses the [Spotipy](https://github.com/plamere/spotipy) API to allow you to view and sort your Spotify playlists to your heart's content.
+Sortify is a Python app built with the Flask framework. It uses the [Spotipy](https://github.com/plamere/spotipy) API to allow you to view and sort your Spotify playlists to your heart's content. I hosted the app on [Heroku](https://eliasbenb-sortify.herokuapp.com/).
 
 
 ## Features supported:
