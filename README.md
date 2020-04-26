@@ -56,15 +56,15 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 - The home page contains Sortify information
 - And it contains a 'Login' button, clicking it will lead to the Spotify authentication page
 
-![Home Page](https://user-images.githubusercontent.com/54410649/80301627-28692b00-87b6-11ea-9297-b235a9cc7f61.PNG)
+![Home Page](https://user-images.githubusercontent.com/54410649/80308198-97f31080-87de-11ea-99f5-8dd0dc5b8106.png)
 ### Login Page:
 - After successfully authenticating your Spotify account, you will receive a success message
 
-![Login Page](https://user-images.githubusercontent.com/54410649/80301630-299a5800-87b6-11ea-871c-26563b8a16b1.PNG)
+![Login Page](https://user-images.githubusercontent.com/54410649/80308225-c244ce00-87de-11ea-8e39-6c718ea49b7d.png)
 ### Playlists Page:
 - After scrolling down on the playlists page you will see all your playlists's images, clicking one will open that playlist's page
 
-![Playlists Page](https://user-images.githubusercontent.com/54410649/80301631-2a32ee80-87b6-11ea-8286-5bfed445dfef.PNG)
+![Playlists Page](https://user-images.githubusercontent.com/54410649/80308226-c375fb00-87de-11ea-9f5d-bee2dbd56c64.png)
 ### Playlist Page:
 - The playlist page contains a table which displays all the playlist's tracks and its information
 - Below that there are a group of buttons which allow you to sort the playlist:
@@ -74,4 +74,4 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 	- Release Date (Non Chronological)
 	- Added Date
 
-![Playlist Page](https://user-images.githubusercontent.com/54410649/80301632-2acb8500-87b6-11ea-8b8b-d286767000c1.PNG)
+![Playlist Page](https://user-images.githubusercontent.com/54410649/80308227-c4a72800-87de-11ea-8707-625b13eecff4.png)
