@@ -17,9 +17,10 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 	- Alphabetically (Z-A)
 	- Release Date (Chronological)
 	- Release Date (Non Chronological)
-	- Added Date
+	- Date Added
 - View playlist tracks in a table
 - Heroku deploy ready
+- Maintains the date added upon sorting
 
 ## To do list:
 - Add support to sort playlists of more than 100 tracks
