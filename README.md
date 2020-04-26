@@ -59,7 +59,6 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 ![Home Page](https://user-images.githubusercontent.com/54410649/80301627-28692b00-87b6-11ea-9297-b235a9cc7f61.PNG)
 ### Login Page:
 - After successfully authenticating your Spotify account, you will receive a success message
-- You will not need to reauthenticate your Spotify account, as the authentication is cached in the Sortify directory in a file named `.cache-spotify`
 
 ![Login Page](https://user-images.githubusercontent.com/54410649/80301630-299a5800-87b6-11ea-871c-26563b8a16b1.PNG)
 ### Playlists Page:
