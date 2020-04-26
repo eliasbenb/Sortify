@@ -1,10 +1,12 @@
 from flask import Flask, render_template, redirect, request, session, make_response,session,redirect
 from datetime import datetime
-import os, requests, spotipy
+import logging, os, requests, spotipy, sys
 import spotipy.util as util
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 def get_tracks(spotipy_obj, username, playlist_ids):
     results = spotipy_obj.user_playlist(username, playlist_ids, fields="tracks, next")
