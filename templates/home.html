@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block arrow_button %}
+<a href="#about-section" class="mouse-icon">
+    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+</a>
+{% endblock %}
+
+{% block body %}
+<div class="container" align="center" style="position:relative;">
+    <h1 style='margin-top: 8.5em;'>Sortify</h1>
+    <form action="/login" method="POST" style="margin-top: 3em;">
+        <a href="/login">
+            <div id="cssbutt" style="background: rgb(29, 185, 84); border-radius: 1000px; padding: 20px 45px; color: rgb(255, 255, 255); display: inline-block; font: bold 24px / 1 &quot;Open Sans&quot;, sans-serif; text-align: center;">Login</div>
+        </a>
+    </form>
+</div>
+
+<section class="section" id="about-section">
+    <div class="container" align="center" style="margin-top: 24em;">
+        <h1>About Sortify</h1>
+        <p style="text-align: center; margin-top: 1.5em;">Sortify is a Python app built with the Flask framework. It uses the Spotipy API to allow you to view and sort your Spotify playlists to your heart's content.</p>
+    </div>
+<a href="https://github.com/eliasbenb/Sortify" target="_blank"><h6 align="center" style="margin-top: 0.5em;">Source Code</h4></a>
+{% endblock %}

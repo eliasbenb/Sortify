@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container" align="center" style="position:relative;">
+    <h1 style='margin-top: 8.5em;'>Login Successful!</h1>
+    <form action="/playlists" method="POST" align="center" style="margin-top: 3em;">
+        <a href="/playlists">
+            <div id="cssbutt" style="background: rgb(29, 185, 84); border-radius: 1000px; padding: 20px 45px; color: rgb(255, 255, 255); display: inline-block; font: bold 24px / 1 &quot;Open Sans&quot;, sans-serif; text-align: center;">Go to Sortify</div>
+        </a>
+    </form>
+</div>
+{% endblock %}
