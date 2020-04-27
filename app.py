@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, session, make_response,session,redirect
 from datetime import datetime
-import logging, os, requests, spotipy, sys
+import logging, os, requests, spotipy, sys, time
 import spotipy.util as util
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ def callback():
     global username
     sp = spotipy.Spotify(auth=session['toke'])
     username = sp.current_user()['id']
-
+    
     return redirect("login_success")
 
 @app.route("/login_success")
@@ -69,6 +69,7 @@ def login_success_page():
 
 @app.route('/playlists')
 def playlists_page():
+    time.sleep(1.5)
     try:
         print(sp)
         global playlists_soup
