@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container" align="center" style="position:relative;">
+    <h1 style='margin-top: 8.5em;'>This is not your playlist!</h1>
+    <h5 style="margin-top: 1em;">You do not own this playlist, and so can't edit it. I reccomend duplicating the playlist and editing the duplicated one.</h5>
+    <form action="/playlists" method="POST" align="center" style="margin-top: 2em;">
+        <a href="/playlists">
+            <div id="cssbutt" style="background: rgb(29, 185, 84); border-radius: 1000px; padding: 20px 45px; color: rgb(255, 255, 255); display: inline-block; font: bold 24px / 1 &quot;Open Sans&quot;, sans-serif; text-align: center;">Go back to Playlists</div>
+        </a>
+    </form>
+</div>
+{% endblock %}
