@@ -24,7 +24,7 @@ Sortify is a Python app built with the Flask framework. It uses the [Spotipy](ht
 - Maintains the date added upon sorting (only if playlist is less than 100 tracks)
 
 ## To do list:
-- Add support to sort playlists of more than 100 tracks
+- ~~Add support to sort playlists of more than 100 tracks~~
 - Add support to sort other people's playlists
 - Add option to sort playlist into new playlist
 
