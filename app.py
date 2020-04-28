@@ -47,7 +47,6 @@ def home_page():
 @app.route("/login")
 def login_page():
     auth_url = f'{API_BASE}/authorize?client_id={SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri={SPOTIFY_REDIRECT_URI}&scope={SCOPE}&show_dialog={SHOW_DIALOG}'
-    print(auth_url)
     return redirect(auth_url)
 
 @app.route("/callback")
@@ -65,7 +64,6 @@ def callback():
         })
 
     res_body = res.json()
-    print(res.json())
     session["token"] = res_body.get("access_token")
     
     return redirect("login_success")
