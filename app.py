@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, session, make_response, url_for
 from datetime import datetime
-import os, requests, spotipy, sys, time
+import os, requests, spotipy, sys
 import spotipy.util as util
 
 app = Flask(__name__)
@@ -76,7 +76,6 @@ def login_success_page():
 
 @app.route('/playlists')
 def playlists_page():
-    time.sleep(0.5)
     try:
         sp = spotipy.Spotify(auth=session['token'])
         playlists_soup = sp.current_user_playlists()
@@ -96,12 +95,16 @@ def playlist_page(index):
     playlist = playlists_soup['items'][index-1]
     playlist_id = playlist['id']
 
-    original_tracks = []
-    original_tracks.extend(get_tracks(sp, username, playlist_id))
-    results = sp.playlist(playlist['id'],
-        fields="tracks,next")
-    tracks = results['tracks']
-    return render_template('playlist.html', playlist = playlist, tracks = tracks, index = index)
+    if playlist['owner']['id'] != username:
+        return redirect (url_for("not_your_playlist_page"))
+    
+    else:
+        original_tracks = []
+        original_tracks.extend(get_tracks(sp, username, playlist_id))
+        results = sp.playlist(playlist['id'],
+            fields="tracks,next")
+        tracks = results['tracks']
+        return render_template('playlist.html', playlist = playlist, tracks = tracks, index = index)
 
 @app.route('/playlists/<int:index>/alphabetical-az')
 def sort_by_alphabetical_az(index):
@@ -110,9 +113,6 @@ def sort_by_alphabetical_az(index):
     playlists_soup = sp.current_user_playlists()
     playlist = playlists_soup['items'][index-1]
     playlist_id = playlist['id']
-
-    if playlist['owner']['id'] != username:
-        return redirect (url_for("not_your_playlist_page"))
 
     original_tracks = []
     original_tracks.extend(get_tracks(sp, username, playlist_id))
