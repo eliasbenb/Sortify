@@ -19,19 +19,25 @@ def get_tracks(spotipy_obj, username, playlist_id):
 
     return original_tracks
 
-def replace_tracks(sorted_tracks, sp, playlist_id, username):
+def replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks):
     track_ids = []
     for sorted_track in sorted_tracks:
         track_ids.append(sorted_track['track']['id'])
     
     if len(track_ids) > 100:
-        chunks = [track_ids[x:x+100] for x in range(0, len(track_ids), 100)]
-        sp.user_playlist_replace_tracks(username, playlist_id, "")
-        for track_ids in chunks:
-            sp.user_playlist_add_tracks(username, playlist_id, track_ids)
-    else:
+        y = 0
+        for sorted_track in sorted_tracks:
+            original_tracks = []
+            original_tracks.extend(get_tracks(sp, username, playlist_id))
+            x = 0
+            for original_track in original_tracks:
+                if original_track == sorted_track:
+                    sp.user_playlist_reorder_tracks(user=username, playlist_id=playlist_id, range_start=x, range_length=1, insert_before=y, snapshot_id=None)
+                else:
+                    x = x + 1
+            y = y + 1
+    elif len(track_ids) <= 10:
         sp.user_playlist_replace_tracks(username, playlist_id, track_ids)
-    
 
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
@@ -117,7 +123,7 @@ def sort_by_alphabetical_az(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']["name"], reverse=False)
-    replace_tracks(sorted_tracks, sp, playlist_id, username)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks)
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/alphabetical-za')
@@ -133,7 +139,7 @@ def sort_by_alphabetical_za(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']["name"], reverse=True)
-    replace_tracks(sorted_tracks, sp, playlist_id, username)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks)
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/release_date-chronological')
@@ -149,7 +155,7 @@ def sort_by_release_date_chronological(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']['album']['release_date'], reverse=True)
-    replace_tracks(sorted_tracks, sp, playlist_id, username)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks=original_tracks)
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/release_date-non_chronological')
@@ -165,7 +171,7 @@ def sort_by_release_date_non_chronological(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']['album']['release_date'], reverse=False)
-    replace_tracks(sorted_tracks, sp, playlist_id, username)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks)
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/added_at')
@@ -181,7 +187,7 @@ def sort_by_added_at(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: datetime.strptime(k["added_at"], "%Y-%m-%dT%H:%M:%SZ"), reverse=True)
-    replace_tracks(sorted_tracks, sp, playlist_id, username)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, original_tracks)
     return render_template('sorted.html', playlist = playlist, index = index)
 
 if __name__ == "__main__":
