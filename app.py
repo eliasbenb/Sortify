@@ -126,6 +126,9 @@ def sort_by_alphabetical_az(index):
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']["name"], reverse=False)
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/alphabetical-za')
@@ -142,6 +145,9 @@ def sort_by_alphabetical_za(index):
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']["name"], reverse=True)
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/release_date-chronological')
@@ -158,6 +164,9 @@ def sort_by_release_date_chronological(index):
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']['album']['release_date'], reverse=True)
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/release_date-non_chronological')
@@ -174,6 +183,9 @@ def sort_by_release_date_non_chronological(index):
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']['album']['release_date'], reverse=False)
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
 
 @app.route('/playlists/<int:index>/added_at')
@@ -190,6 +202,9 @@ def sort_by_added_at(index):
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: datetime.strptime(k["added_at"], "%Y-%m-%dT%H:%M:%SZ"), reverse=True)
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
 
 if __name__ == "__main__":
