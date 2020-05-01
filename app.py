@@ -1,11 +1,18 @@
+##########  IMPORTS   ##########
 from flask import Flask, render_template, redirect, request, session, make_response, url_for
 from datetime import datetime
 import os, requests, spotipy, sys
 import spotipy.util as util
 
+##########  FLASK CONFIG   ##########
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
+@app.route("/")
+def home_page():
+    return render_template("home.html")
+
+##########  FUNCTIONS   ##########
 def get_tracks(spotipy_obj, username, playlist_id):
     results = spotipy_obj.user_playlist(username, playlist_id, fields="tracks, next")
     temp_tracks = results["tracks"]
@@ -45,16 +52,13 @@ def create_playlist(sp, username, sorted_tracks, playlist_id, playlist):
     for track_ids in chunks:
         sp.user_playlist_add_tracks(username, playlist_id, track_ids)
 
+##########  SPOTIFY AUTHENTICATION   ##########
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 SCOPE = 'playlist-read-collaborative,playlist-read-private,playlist-modify-public,playlist-modify-private'
 SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI')
 API_BASE = 'https://accounts.spotify.com'
 SHOW_DIALOG = True
-
-@app.route("/")
-def home_page():
-    return render_template("home.html")
 
 @app.route("/login")
 def login_page():
@@ -84,6 +88,7 @@ def callback():
 def login_success_page():
     return render_template("login_success.html")
 
+##########  SORTIFY   ##########
 @app.route('/playlists')
 def playlists_page():
     try:
@@ -92,10 +97,6 @@ def playlists_page():
         return render_template('playlists.html', playlists_soup = playlists_soup)
     except:
         return redirect("login")
-
-@app.route('/not_your_playlist')
-def not_your_playlist_page():
-    return render_template('not_your_playlist.html')
 
 @app.route('/playlists/<int:index>')
 def playlist_page(index):
@@ -206,6 +207,19 @@ def sort_by_added_at(index):
     if playlist['owner']['id'] != username:
         index = 1
     return render_template('sorted.html', playlist = playlist, index = index)
+
+##########  ERROR HANDLING   ##########
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('500.html'), 500
+
+@app.route('/not_your_playlist')
+def not_your_playlist_page():
+    return render_template('not_your_playlist.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
