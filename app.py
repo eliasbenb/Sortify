@@ -4,6 +4,10 @@ from datetime import datetime
 import os, requests, spotipy, sys
 import spotipy.util as util
 
+import json
+from pprint import pprint
+import re
+
 ##########  FLASK CONFIG   ##########
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
@@ -145,6 +149,30 @@ def sort_by_alphabetical_za(index):
 
     sorted_tracks = sorted(original_tracks,
                     key=lambda k: k['track']["name"], reverse=True)
+    replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
+
+    if playlist['owner']['id'] != username:
+        index = 1
+    return render_template('sorted.html', playlist = playlist, index = index)
+
+@app.route('/playlists/<int:index>/artist')
+def sort_by_artist(index):
+    sp = spotipy.Spotify(auth=session['token'])
+    username = sp.current_user()['id']
+    playlists_soup = sp.current_user_playlists()
+    playlist = playlists_soup['items'][index-1]
+    playlist_id = playlist['id']
+
+    def clean_artist(name: str):
+        name = name.lower()
+        words = [w for w in name.split() if w not in ['a', 'an', 'the']]
+        return ' '.join(words)
+
+    original_tracks = []
+    original_tracks.extend(get_tracks(sp, username, playlist_id))
+
+    sorted_tracks = sorted(original_tracks,
+                    key=lambda k: clean_artist(k['track']["artists"][0]["name"]))
     replace_tracks(sorted_tracks, sp, playlist_id, username, playlist)
 
     if playlist['owner']['id'] != username:
